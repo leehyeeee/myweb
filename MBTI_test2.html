@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <style>
+    /* 결과 페이지 스타일 */
+    #resultPage {
+      display: none;
+      text-align: center; /* 결과 페이지의 내용을 가운데 정렬 */
+    }
+
+    #result {
+      font-size: 24px;
+      font-weight: bold;
+      margin-bottom: 20px;
+    }
+
+    #resultImage {
+      width: 300px;
+      height: 300px;
+      object-fit: cover;
+      border-radius: 50%;
+    }
+    /* 질문 페이지 스타일 */
+    #questionPage {
+      text-align: center; 
+    }
+
+    #questionPage h1 {
+      margin-bottom: 20px;
+    }
+
+
+    /* 시작 페이지 스타일 */
+    #startPage {
+      text-align: center; /* 시작 페이지의 내용을 가운데 정렬 */
+    }
+
+    #startPage h1 {
+      margin-bottom: 20px;
+    }
+
+    #startPage button {
+      font-size: 18px;
+      padding: 10px 20px;
+    }
+  </style>
+</head>
+
+<head>
+  <meta charset="UTF-8">
+  <title>여행 MBTI 테스트</title>
+  <script>
+    var currentQuestion = 0;
+
+    function startTest() {
+      var startPage = document.getElementById("startPage");
+      startPage.style.display = "none";
+      showNextQuestion();
+    }
+
+    function showNextQuestion() {
+  	var questionPages = document.getElementsByClassName("question-page");
+  	if (currentQuestion === 0){
+      questionPages[currentQuestion].style.display = 'block';
+      currentQuestion++; 
+      }
+
+  	else if (currentQuestion > 0 && currentQuestion < questionPages.length) {
+    	questionPages[currentQuestion-1].style.display = 'none'; 
+    	questionPages[currentQuestion].style.display = 'block';
+    	currentQuestion++;
+  	} else {
+    	submitForm();
+  	}
+    }
+
+    function showPreviousQuestion() {
+      var questionPages = document.getElementsByClassName("question-page");
+
+      if (currentQuestion > 0) {
+        questionPages[currentQuestion].style.display = 'none';
+        currentQuestion--;
+        questionPages[currentQuestion].style.display = 'block';
+      }
+    }
+
+function submitForm() {
+  var answers = [];
+  var questionPages = document.getElementsByClassName("question-page");
+
+  for (var i = 0; i < questionPages.length; i++) {
+    var questionElement = questionPages[i].querySelectorAll('input[type="radio"]:checked');
+
+    if (questionElement.length > 0) {
+      var answer = parseFloat(questionElement[0].value);
+      answers.push(answer);
+    }
+  }
+
+  if (answers.length === questionPages.length) {
+    var result = calculateResult(answers);
+    displayResult(result);
+  } else {
+    alert("모든 질문에 응답해주세요.");
+  }
+}
+
+    function calculateResult(answers) {
+      var sum1 = answers[0] + answers[4] + answers[8];
+      var sum2 = answers[1] + answers[5] + answers[9];
+      var sum3 = answers[2] + answers[6] + answers[10];
+      var sum4 = answers[3] + answers[7] + answers[11];
+
+      var result = '';
+
+      if (sum1 < 0) {
+        result += 'I';
+      } else if (sum1 > 0) {
+        result += 'E';
+      }
+
+      if (sum2 < 0) {
+        result += 'N';
+      } else if (sum2 > 0) {
+        result += 'S';
+      }
+
+      if (sum3 < 0) {
+        result += 'F';
+      } else if (sum3 > 0) {
+        result += 'T';
+      }
+
+      if (sum4 < 0) {
+        result += 'P';
+      } else if (sum4 > 0) {
+        result += 'J';
+      }
+
+      return result;
+    }
+
+    function displayResult(result) {
+      var resultElement = document.getElementById('result');
+      var resultImage = document.createElement('img');
+
+      switch (result) {
+        case 'ENFP':
+          resultElement.textContent = '#에너자이저 #캠핑 #레저';
+          resultImage.src = 'enfp_image.jpg';
+          break;
+        case 'ENFJ':
+          resultElement.textContent = '#보부상 #꼼꼼 #FLEX';
+          resultImage.src = 'enfj_image.jpg';
+          break;
+        case 'ENTP':
+          resultElement.textContent = '#낭만 #박물관 #자연';
+          resultImage.src = 'entp_image.jpg';
+          break;
+        case 'ENTJ':
+          resultElement.textContent = '#리더 #계획 #알찬여행';
+          resultImage.src = 'entj_image.jpg';
+          break;
+        case 'ESFP':
+          resultElement.textContent = '#FLEX #NEW #친구';
+          resultImage.src = 'esfp_image.jpg';
+          break;
+        case 'ESFJ':
+          resultElement.textContent = '#게시물 #SNS #사진';
+          resultImage.src = 'esfj_image.jpg';
+          break;
+        case 'ESTP':
+          resultElement.textContent = '#즉흥 #가성비 #레저';
+          resultImage.src = 'estp_image.jpg';
+          break;
+        case 'ESTJ':
+          resultElement.textContent = '#계획 #효율 #가성비';
+          resultImage.src = 'estj_image.jpg';
+          break;
+        case 'INFP':
+          resultElement.textContent = '#호캉스 #자유 #낭만';
+          resultImage.src = 'infp_image.jpg';
+          break;
+        case 'INFJ':
+          resultElement.textContent = '#힐링 #관광 #조화';
+          resultImage.src = 'infj_image.jpg';
+          break;
+        case 'INTP':
+          resultElement.textContent = '#효율 #무계획 #알쓸번잡';
+          resultImage.src = 'intp_image.jpg';
+          break;
+        case 'INTJ':
+          resultElement.textContent = '#효율 #자연 #완벽';
+          resultImage.src = 'intj_image.jpg';
+          break;
+        case 'ISFP':
+          resultElement.textContent = '#낭만 #버킷리스트 #편리';
+          resultImage.src = 'isfp_image.jpg';
+          break;
+        case 'ISFJ':
+          resultElement.textContent = '#평화 #힐링 #호캉스';
+          resultImage.src = 'isfj_image.jpg';
+          break;
+        case 'ISTP':
+          resultElement.textContent = '#개성 #힐링 #유유자적';
+          resultImage.src = 'istp_image.jpg';
+          break;
+        case 'ISTJ':
+          resultElement.textContent = '#계획 #관광 #엑셀일정';
+          resultImage.src = 'istj_image.jpg';
+          break;
+        default:
+          resultElement.textContent = '결과 없음';
+          break;
+      }
+
+      resultElement.appendChild(resultImage);
+      document.getElementById('questionPage').style.display = 'none';
+      document.getElementById('resultPage').style.display = 'block';
+    }
+
+    function showResult() {
+      submitForm();
+    }
+  </script>
+
+  <style>
+    .question-page {
+      display: none;
+
+      align-items: center;
+    }
+  .question-page label {
+    display: block;
+    margin: 10px auto;
+  }
+  </style>
+
+<style>
+  input[type="radio"] {
+    transform: scale(3);
+    margin-right: 20px;
+  }
+</style>
+
+</head>
+<body>
+  <div id="startPage">
+    <br>
+    <br>
+    <br>
+    <img src="https://leehyeeee.github.io/myweb/시작화면.png" alt="Start Image" style="width: 500px; height: 500px;">
+    <br>
+    <br>
+    <button onclick="startTest()" style="width: 200px; height: 50px;">Start</button>
+  </div>
+
+  <div id="questionPage">
+    <div class="question-page">
+      <br>
+      <br>
+      <br>
+      <h1>질문 1. 내 남아도는 체력을 밖으로 분출하고 싶다.</h1>
+      <br>
+      <br>
+        <label><input type="radio" name="answer1" value="-1.5"> 매우 아니다.</label><br><br>
+        <label><input type="radio" name="answer1" value="-1"> 아니다.</label><br><br>
+        <label><input type="radio" name="answer1" value="1"> 그렇다.</label><br><br>
+        <label><input type="radio" name="answer1" value="1.5"> 매우 그렇다.</label>
+      <br>
+      <br>
+      <br>
+      <button onclick="showNextQuestion()" style="width: 200px; height: 50px;">Next</button>
+    </div>
+
+    <div class="question-page">
+      <br>
+      <br>
+      <br>
+      <h1>질문 2. 야경보다 자연 풍경이 좋은 곳이 좋다.</h1>
+      <br>
+      <br>
+        <label><input type="radio" name="answer2" value="1.5"> 매우 아니다.</label><br><br>
+        <label><input type="radio" name="answer2" value="1"> 아니다. </label><br><br>
+        <label><input type="radio" name="answer2" value="-1"> 그렇다. </label><br><br>
+        <label><input type="radio" name="answer2" value="-1.5"> 매우 그렇다. </label>
+      <br>
+      <br>
+      <br>
+      <button onclick="showNextQuestion()" style="width: 200px; height: 50px;">Next</button>
+    </div>
+
+    <div class="question-page">
+      <br>
+      <br>
+      <br>
+      <h1>질문 3. 놀러간 김에 마음에 드는 물건이 있으면 필요없어도 산다.</h1>
+      <br>
+      <br>
+        <label><input type="radio" name="answer3" value="1.5"> 매우 아니다. </label><br><br>
+        <label><input type="radio" name="answer3" value="1"> 아니다. </label><br><br>
+        <label><input type="radio" name="answer3" value="-1"> 그렇다. </label><br><br>
+        <label><input type="radio" name="answer3" value="-1.5"> 매우 그렇다. </label>
+      <br>
+      <br>
+      <br>
+      <button onclick="showNextQuestion()" style="width: 200px; height: 50px;">Next</button>
+    </div>
+
+    <div class="question-page">
+      <br>
+      <br>
+      <br>
+      <h1>질문 4. 여행 가기 전 급히 싼 짐을 들고 여행을 떠난다.</h1>
+      <br>
+      <br>
+        <label><input type="radio" name="answer4" value="1.5"> 매우 아니다. </label><br><br>
+        <label><input type="radio" name="answer4" value="1"> 아니다.</label><br><br>
+        <label><input type="radio" name="answer4" value="-1"> 그렇다. </label><br><br>
+        <label><input type="radio" name="answer4" value="-1.5"> 매우 그렇다. </label>
+      <br>
+      <br>
+      <br>
+      <button onclick="showNextQuestion()" style="width: 200px; height: 50px;">Next</button>
+    </div>
+
+    <div class="question-page">
+      <br>
+      <br>
+      <br>
+      <h1>질문 5. 레저 활동을 즐기기 보다 카페에서 음료수 한 잔이 좋다. </h1>
+      <br>
+      <br>
+        <label><input type="radio" name="answer5" value="1.5" > 매우 아니다. </label><br><br>
+        <label><input type="radio" name="answer5" value="1" > 아니다. </label><br><br>
+        <label><input type="radio" name="answer5" value="-1" > 그렇다. </label><br><br>
+        <label><input type="radio" name="answer5" value="-1.5" > 매우 그렇다. </label>
+      <br>
+      <br>
+      <br>
+      <button onclick="showNextQuestion()" style="width: 200px; height: 50px;">Next</button>
+    </div>
+
+    <div class="question-page">
+      <br>
+      <br>
+      <br>
+      <h1>질문 6. 나는 산과 바다, 꽃 구경이 좋다.</h1>
+      <br>
+      <br>
+        <label><input type="radio" name="answer6" value="1.5"> 매우 아니다.</label><br><br>
+        <label><input type="radio" name="answer6" value="1" > 아니다. </label><br><br>
+        <label><input type="radio" name="answer6" value="-1"> 그렇다. </label><br><br>
+        <label><input type="radio" name="answer6" value="-1.5"> 매우 그렇다.</label>
+      <br>
+      <br>
+      <br>
+      <button onclick="showNextQuestion()" style="width: 200px; height: 50px;">Next</button>
+    </div>
+
+    <div class="question-page">
+      <br>
+      <br>
+      <br>
+      <h1>질문 7. 여행에 쓰는 돈은 아깝지 않다.</h1>
+      <br>
+      <br>
+        <label><input type="radio" name="answer7" value="1.5"> 매우 아니다. </label><br><br>
+        <label><input type="radio" name="answer7" value="1"> 아니다. </label><br><br>
+        <label><input type="radio" name="answer7" value="-1"> 그렇다. </label><br><br>
+        <label><input type="radio" name="answer7" value="-1.5"> 매우 그렇다. </label>
+      <br>
+      <br>
+      <br>
+      <button onclick="showNextQuestion()" style="width: 200px; height: 50px;">Next</button>
+    </div>
+
+    <div class="question-page">
+      <br>
+      <br>
+      <br>
+      <h1>질문 8. 이동 시간과 동선을 고려하여 여행 계획표를 작성한다.</h1>
+      <br>
+      <br>
+        <label><input type="radio" name="answer8" value="-1.5"> 매우 아니다. </label><br><br>
+        <label><input type="radio" name="answer8" value="-1"> 아니다. </label><br><br>
+        <label><input type="radio" name="answer8" value="1"> 그렇다. </label><br><br>
+        <label><input type="radio" name="answer8" value="1.5"> 매우 그렇다. </label>
+      <br>
+      <br>
+      <br>
+      <button onclick="showNextQuestion()" style="width: 200px; height: 50px;">Next</button>
+    </div>
+
+    <div class="question-page">
+      <br>
+      <br>
+      <br>
+      <h1>질문 9. 여행에 가서까지 실내에 있으면 심심하고 아쉽다. </h1>
+      <br>
+      <br>
+        <label><input type="radio" name="answer9" value="-1.5"> 매우 아니다. </label><br><br>
+        <label><input type="radio" name="answer9" value="-1"> 아니다. </label><br><br>
+        <label><input type="radio" name="answer9" value="1"> 그렇다.</label><br><br>
+        <label><input type="radio" name="answer9" value="1.5"> 매우 그렇다. </label>
+      <br>
+      <br>
+      <br>
+      <button onclick="showNextQuestion()" style="width: 200px; height: 50px;">Next</button>
+    </div>
+
+    <div class="question-page">
+      <br>
+      <br>
+      <br>
+      <h1>질문 10. 아무리 풍경이 예뻐도 편의시설이 불편하면 싫다.</h1>
+      <br>
+      <br>
+        <label><input type="radio" name="answer10" value="-1.5"> 매우 아니다. </label><br><br>
+        <label><input type="radio" name="answer10" value="-1"> 아니다.</label><br><br>
+        <label><input type="radio" name="answer10" value="1"> 그렇다.</label><br><br>
+        <label><input type="radio" name="answer10" value="1.5"> 매우 그렇다. </label>
+      <br>
+      <br>
+      <br>
+      <button onclick="showNextQuestion()" style="width: 200px; height: 50px;">Next</button>
+    </div>
+
+    <div class="question-page">
+      <br>
+      <br>
+      <br>
+      <h1>질문 11. 나는 여행에 있어 금전적 부담이 없다.</h1>
+      <br>
+      <br>
+        <label><input type="radio" name="answer11" value="1.5"> 매우 아니다.</label><br><br>
+        <label><input type="radio" name="answer11" value="1"> 아니다.</label><br><br>
+        <label><input type="radio" name="answer11" value="-1"> 그렇다. </label><br><br>
+        <label><input type="radio" name="answer11" value="-1.5"> 매우 그렇다. </label>
+      <br>
+      <br>
+      <br>
+      <button onclick="showNextQuestion()" style="width: 200px; height: 50px;">Next</button>
+    </div>
+
+    <div class="question-page">
+      <br>
+      <br>
+      <br>
+      <h1>질문 12. 가려던 곳을 못 가게 된다면 근처에 아무 곳에 가면 된다.</h1>
+      <br>
+      <br>
+        <label><input type="radio" name="answer12" value="1.5"> 매우 아니다.</label><br><br>
+        <label><input type="radio" name="answer12" value="1"> 아니다.</label><br><br>
+        <label><input type="radio" name="answer12" value="-1"> 그렇다. </label><br><br>
+        <label><input type="radio" name="answer12" value="-1.5"> 매우 그렇다. </label>
+      <br>
+      <br>
+      <br>
+      <button onclick="showResult()" style="width: 200px; height: 50px;">결과 확인</button>
+    </div>
+  </div>
+
+  <div id="resultPage" style="display: none;">
+     <br>
+     <br>
+     <br>
+    <h2>결과</h2>
+    <br>
+    <br>
+    <div id="result"></div>
+    <br>
+    <br>
+    <img id="resultImage" alt="Result Image">
+    <br>
+    <br>
+    <button style="width: 300px; height: 50px;"> 맞춤 여행 추천 받고 펫 받으러 가자!</button>
+  </div>
+</body>
+</html>
