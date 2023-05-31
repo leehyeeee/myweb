@@ -1,6 +1,12 @@
 <!DOCTYPE html>
 <html>
 <head>
+<style>
+  input[type="radio"] {
+    transform: scale(3);
+    margin-right: 20px;
+  }
+</style>
   <style>
     /* 결과 페이지 스타일 */
     #resultPage {
@@ -14,12 +20,20 @@
     }
 
     #resultImage {
-      width: 300px;
-      height: 300px;
-      /*object-fit: cover;*/
-      border-radius: 50%;
+      /*width: 300px;
+      height: 300px;*/
+      object-fit: contain;
     }
-    /* 질문 페이지 스타일 */
+    /* 질문 페이지 스타일 */    
+    .question-page {
+      display: none;
+
+      align-items: center;
+    }
+  .question-page label {
+    display: block;
+    margin: 10px auto;
+  }
     #questionPage {
       text-align: center; 
     }
@@ -39,7 +53,7 @@
     }
 
     #startPage button {
-      font-size: 18px;
+      font-size: 30px;
       padding: 10px 20px;
     }
   </style>
@@ -162,19 +176,19 @@ function submitForm() {
           break;
         case 'ESFP':
           resultElement.textContent = '';
-          resultImage.src = 'esfp_image.jpg';
+          resultImage.src = 'https://leehyeeee.github.io/myweb/슬라이드5.PNG';
           break;
         case 'ESFJ':
           resultElement.textContent = '';
-          resultImage.src = 'esfj_image.jpg';
+          resultImage.src = 'https://leehyeeee.github.io/myweb/슬라이드6.PNG';
           break;
         case 'ESTP':
           resultElement.textContent = '';
-          resultImage.src = 'estp_image.jpg';
+          resultImage.src = 'https://leehyeeee.github.io/myweb/슬라이드7.PNG';
           break;
         case 'ESTJ':
           resultElement.textContent = '';
-          resultImage.src = 'estj_image.jpg';
+          resultImage.src = 'https://leehyeeee.github.io/myweb/슬라이드8.PNG';
           break;
         case 'INFP':
           resultElement.textContent = '';
@@ -194,15 +208,15 @@ function submitForm() {
           break;
         case 'ISFP':
           resultElement.textContent = '';
-          resultImage.src = 'isfp_image.jpg';
+          resultImage.src = 'https://leehyeeee.github.io/myweb/슬라이드13.PNG';
           break;
         case 'ISFJ':
           resultElement.textContent = '';
-          resultImage.src = 'isfj_image.jpg';
+          resultImage.src = 'https://leehyeeee.github.io/myweb/슬라이드14.PNG';
           break;
         case 'ISTP':
           resultElement.textContent = '';
-          resultImage.src = 'istp_image.jpg';
+          resultImage.src = 'https://leehyeeee.github.io/myweb/슬라이드15.PNG';
           break;
         case 'ISTJ':
           resultElement.textContent = '';
@@ -222,26 +236,6 @@ function submitForm() {
       submitForm();
     }
   </script>
-
-  <style>
-    .question-page {
-      display: none;
-
-      align-items: center;
-    }
-  .question-page label {
-    display: block;
-    margin: 10px auto;
-  }
-  </style>
-
-<style>
-  input[type="radio"] {
-    transform: scale(3);
-    margin-right: 20px;
-  }
-</style>
-
 </head>
 <body>
   <div id="startPage">
@@ -467,13 +461,8 @@ function submitForm() {
     <h2>결과</h2>
     <br>
     <br>
-    <div id="result"></div>
-    <br>
-    <br>
     <img id="resultImage" alt="Result Image">
-    <br>
-    <br>
-    <button style="width: 90%; height: 60px; font-size: 40px"> 맞춤 여행 추천 받고 펫 받으러 가자!</button>
+    <button style="width: 90%; height: 80px; font-size: 40px"> 맞춤 여행 추천 받고 펫 받으러 가자!</button>
   </div>
 </body>
 </html>
