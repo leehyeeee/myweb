@@ -1,15 +1,10 @@
 <!DOCTYPE html>
 <html>
 <head>
-<style>
-  input[type="radio"] {
-    transform: scale(3);
-    margin-right: 20px;
-  }
-</style>
   <style>
     /* 결과 페이지 스타일 */
     #resultPage {
+      display: none;
       text-align: center; /* 결과 페이지의 내용을 가운데 정렬 */
     }
 
@@ -20,20 +15,12 @@
     }
 
     #resultImage {
-      /*width: 300px;
-      height: 300px;*/
-      object-fit: contain;
+      width: 300px;
+      height: 300px;
+      object-fit: cover;
+      border-radius: 50%;
     }
-    /* 질문 페이지 스타일 */    
-    .question-page {
-      display: none;
-
-      align-items: center;
-    }
-  .question-page label {
-    display: block;
-    margin: 10px auto;
-  }
+    /* 질문 페이지 스타일 */
     #questionPage {
       text-align: center; 
     }
@@ -53,7 +40,7 @@
     }
 
     #startPage button {
-      font-size: 30px;
+      font-size: 18px;
       padding: 10px 20px;
     }
   </style>
@@ -236,18 +223,43 @@ function submitForm() {
       submitForm();
     }
   </script>
+
+  <style>
+    .question-page {
+      display: none;
+
+      align-items: center;
+    }
+  .question-page label {
+    display: block;
+    margin: 10px auto;
+  }
+  </style>
+
+<style>
+  input[type="radio"] {
+    transform: scale(3);
+    margin-right: 20px;
+  }
+</style>
+
 </head>
 <body>
   <div id="startPage">
-    <br><br><br><br>
+    <br>
+    <br>
+    <br>
     <img src="https://leehyeeee.github.io/myweb/시작화면.png" alt="Start Image" style="width: 90%; height: 90%;">
-    <br><br>
+    <br>
+    <br>
     <button onclick="startTest()" style="width: 200px; height: 50px; font-size: 30px">Start</button>
   </div>
 
   <div id="questionPage">
     <div class="question-page">
-      <br><br><br><br>
+      <br>
+      <br>
+      <br>
       <h1>질문 1. 내 남아도는 체력을 밖으로 분출하고 싶다.</h1>
       <br>
       <br>
@@ -262,7 +274,9 @@ function submitForm() {
     </div>
 
     <div class="question-page">
-      <br><br><br><br>
+      <br>
+      <br>
+      <br>
       <h1>질문 2. 야경보다 자연 풍경이 좋은 곳이 좋다.</h1>
       <br>
       <br>
@@ -277,7 +291,9 @@ function submitForm() {
     </div>
 
     <div class="question-page">
-      <br><br><br><br>
+      <br>
+      <br>
+      <br>
       <h1>질문 3. 놀러간 김에 마음에 드는 물건이 있으면 필요없어도 산다.</h1>
       <br>
       <br>
@@ -292,7 +308,9 @@ function submitForm() {
     </div>
 
     <div class="question-page">
-      <br><br><br><br>
+      <br>
+      <br>
+      <br>
       <h1>질문 4. 여행 가기 전 급히 싼 짐을 들고 여행을 떠난다.</h1>
       <br>
       <br>
@@ -307,7 +325,9 @@ function submitForm() {
     </div>
 
     <div class="question-page">
-      <br><br><br><br>
+      <br>
+      <br>
+      <br>
       <h1>질문 5. 레저 활동을 즐기기 보다 카페에서 음료수 한 잔이 좋다. </h1>
       <br>
       <br>
@@ -322,7 +342,9 @@ function submitForm() {
     </div>
 
     <div class="question-page">
-      <br><br><br><br>
+      <br>
+      <br>
+      <br>
       <h1>질문 6. 나는 산과 바다, 꽃 구경이 좋다.</h1>
       <br>
       <br>
@@ -337,7 +359,9 @@ function submitForm() {
     </div>
 
     <div class="question-page">
-      <br><br><br><br>
+      <br>
+      <br>
+      <br>
       <h1>질문 7. 여행에 쓰는 돈은 아깝지 않다.</h1>
       <br>
       <br>
@@ -352,7 +376,9 @@ function submitForm() {
     </div>
 
     <div class="question-page">
-      <br><br><br><br>
+      <br>
+      <br>
+      <br>
       <h1>질문 8. 이동 시간과 동선을 고려하여 여행 계획표를 작성한다.</h1>
       <br>
       <br>
@@ -367,7 +393,9 @@ function submitForm() {
     </div>
 
     <div class="question-page">
-      <br><br><br><br>
+      <br>
+      <br>
+      <br>
       <h1>질문 9. 여행에 가서까지 실내에 있으면 심심하고 아쉽다. </h1>
       <br>
       <br>
@@ -382,7 +410,9 @@ function submitForm() {
     </div>
 
     <div class="question-page">
-      <br><br><br><br>
+      <br>
+      <br>
+      <br>
       <h1>질문 10. 아무리 풍경이 예뻐도 편의시설이 불편하면 싫다.</h1>
       <br>
       <br>
@@ -410,11 +440,13 @@ function submitForm() {
       <br>
       <br>
       <br>
-      <button onclick="showNextQuestion()" style="width: 200px; height: 50px; font-size: 30px"">Next</button>
+      <button onclick="showNextQuestion()" style="width: 200px; height: 50px; font-size: 30px">Next</button>
     </div>
 
     <div class="question-page">
-      <br><br><br><br>
+      <br>
+      <br>
+      <br>
       <h1>질문 12. 가려던 곳을 못 가게 된다면 근처에 아무 곳에 가면 된다.</h1>
       <br>
       <br>
@@ -425,7 +457,7 @@ function submitForm() {
       <br>
       <br>
       <br>
-      <button onclick="showResult()" style="width: 200px; height: 50px; font-size : 30px">결과 확인</button>
+      <button onclick="showResult()" style="width: 200px; height: 50px; font-size: 30px">결과 확인</button>
     </div>
   </div>
 
@@ -433,13 +465,13 @@ function submitForm() {
      <br>
      <br>
      <br>
-     <br>
-     <br>
-    <h1>결과</h1>
+    <h2>결과</h2>
     <br>
     <br>
-    <img id="resultImage" alt="Result Image">
-    <button style="width: 90%; height: 80px; font-size: 40px"> 맞춤 여행 추천 받고 펫 받으러 가자!</button>
+    <div id="result"></div>
+    <br>
+    <br>
+    <button style="width: 80%; height: 60px; font-size: 30px"> 맞춤 여행 추천 받고 펫 받으러 가자!</button>
   </div>
 </body>
 </html>
